@@ -1,0 +1,2947 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    142070,       2938]
+NotebookOptionsPosition[    141594,       2918]
+NotebookOutlinePosition[    141969,       2934]
+CellTagsIndexPosition[    141926,       2931]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"startPoint", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", " ", "0", ",", " ", "0"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"height", " ", "=", " ", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r", " ", "=", " ", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n", " ", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"count", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"3", "^", "n"}], "-", "1"}], ")"}], "/", "2"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"referencePoints", " ", "=", " ", 
+   RowBox[{"{", "startPoint", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"diamonds", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"drawDiamond", "[", 
+    RowBox[{"diamond_", ",", " ", "color_"}], "]"}], " ", ":=", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{"color", ",", " ", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}], " ", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "4", "]"}], "]"}]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+           RowBox[{"diamond", "[", 
+            RowBox[{"[", "5", "]"}], "]"}]}], "}"}], "]"}]}], 
+       "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"calculateDiamond", "[", 
+    RowBox[{"point_", ",", " ", "height_", ",", " ", "r_"}], "]"}], " ", ":=",
+    " ", "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "point1", ",", " ", "point2", ",", " ", "point3", ",", " ", "point4", 
+       ",", " ", "diamond"}], "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"point1", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"point", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+         RowBox[{"point", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], " ", "+", " ", 
+          RowBox[{"height", " ", "/", " ", "2"}]}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"point2", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"point", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], " ", "+", " ", "r"}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], " ", "+", " ", "height"}]}], 
+        "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"point2", " ", "=", " ", 
+       RowBox[{"RegionCentroid", "[", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{"point1", ",", " ", "point2"}], "}"}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"point3", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], " ", "-", " ", 
+          RowBox[{
+           RowBox[{"Tan", "[", 
+            RowBox[{"\[Pi]", "/", "6"}], "]"}], "*", "3", "*", 
+           RowBox[{"r", "/", "2"}]}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], " ", "-", " ", 
+          RowBox[{"r", "/", "2"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], " ", "+", " ", "height"}]}], 
+        "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"point3", " ", "=", " ", 
+       RowBox[{"RegionCentroid", "[", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{"point1", ",", " ", "point3"}], "}"}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"point4", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], " ", "+", " ", 
+          RowBox[{
+           RowBox[{"Tan", "[", 
+            RowBox[{"\[Pi]", "/", "6"}], "]"}], "*", "3", "*", 
+           RowBox[{"r", "/", "2"}]}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], " ", "-", " ", 
+          RowBox[{"r", "/", "2"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"point", "[", 
+           RowBox[{"[", "3", "]"}], "]"}], " ", "+", " ", "height"}]}], 
+        "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"point4", " ", "=", " ", 
+       RowBox[{"RegionCentroid", "[", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{"point1", ",", " ", "point4"}], "}"}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"diamond", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "point", ",", " ", "point1", ",", " ", "point2", ",", " ", "point3", 
+         ",", " ", "point4"}], "}"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", "diamond"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.863322291457688*^9, 3.8633224106123824`*^9}, {
+   3.863322442424147*^9, 3.863322644629465*^9}, {3.8633236594113984`*^9, 
+   3.8633236671397843`*^9}, {3.863334703254609*^9, 3.8633347516035457`*^9}, {
+   3.863334862865655*^9, 3.863334863515665*^9}, {3.863334973157118*^9, 
+   3.8633349739235663`*^9}, 3.8633350683840675`*^9, 3.863335103901318*^9, {
+   3.8633351603466434`*^9, 3.86333524299072*^9}, {3.8633354117117033`*^9, 
+   3.8633354133570175`*^9}, {3.8633354842037125`*^9, 
+   3.8633354866041484`*^9}, {3.863336365268158*^9, 3.8633363701908116`*^9}, {
+   3.8633366356650825`*^9, 3.863336671879235*^9}, {3.8633367054541283`*^9, 
+   3.863336709149985*^9}, {3.863337092482444*^9, 3.8633370953483486`*^9}, {
+   3.863337133583143*^9, 3.863337143427497*^9}, {3.863337387462717*^9, 
+   3.8633374288547106`*^9}, {3.8633374641243343`*^9, 
+   3.8633374835973988`*^9}, {3.863337617151223*^9, 3.8633376477384043`*^9}, {
+   3.8633376944729843`*^9, 3.8633377523664846`*^9}, {3.863337786973379*^9, 
+   3.863337815840555*^9}, {3.863337962460943*^9, 3.863337984374514*^9}, {
+   3.8633381077494073`*^9, 3.8633381271611905`*^9}, {3.8633381592186623`*^9, 
+   3.8633381864975986`*^9}, {3.8633382673329644`*^9, 
+   3.8633383173992896`*^9}, {3.8633383782908444`*^9, 
+   3.8633384073804245`*^9}, {3.8633384380925894`*^9, 
+   3.8633384597867794`*^9}, {3.863338634085244*^9, 3.863338712347268*^9}, {
+   3.863338802684848*^9, 3.863338813651001*^9}, {3.863338856431821*^9, 
+   3.863338877094342*^9}, {3.8633390466634073`*^9, 3.8633390550959034`*^9}, {
+   3.8633392707994766`*^9, 3.86333985725875*^9}, {3.863339913630823*^9, 
+   3.8633399580969696`*^9}, {3.8633401539994*^9, 3.8633401762993536`*^9}, {
+   3.8633402080392714`*^9, 3.8633402110968437`*^9}, {3.8633402509115815`*^9, 
+   3.863340257407544*^9}, {3.8633402927678766`*^9, 3.8633403292016325`*^9}, {
+   3.8633408452288475`*^9, 3.8633409384419875`*^9}, {3.8633411609684787`*^9, 
+   3.8633411633720694`*^9}, {3.8633413853496523`*^9, 3.863341471853828*^9}, {
+   3.863341553089588*^9, 3.8633415674539824`*^9}, {3.863341636800536*^9, 
+   3.863341638226035*^9}, {3.863341784792882*^9, 3.8633418152043133`*^9}, {
+   3.8633418457647233`*^9, 3.86334233171146*^9}, {3.863342400029502*^9, 
+   3.863342471705158*^9}, {3.863342512874729*^9, 3.86334259785172*^9}, {
+   3.863342631152737*^9, 3.863342671644582*^9}, {3.8633427197207747`*^9, 
+   3.8633427401472197`*^9}, {3.863342959029423*^9, 3.863342994510956*^9}, {
+   3.863343047631606*^9, 3.8633430527127223`*^9}, {3.86334308478452*^9, 
+   3.8633431315838294`*^9}, {3.863343498624982*^9, 3.863343502559598*^9}, {
+   3.8633440412319107`*^9, 3.8633440503136864`*^9}, {3.863345400785413*^9, 
+   3.8633454012971687`*^9}, {3.8633455849825287`*^9, 
+   3.8633455938020334`*^9}, {3.8633463344708643`*^9, 
+   3.8633463346084642`*^9}, {3.8633465670110874`*^9, 
+   3.8633465782849426`*^9}, {3.863346945808114*^9, 3.863346965291645*^9}, {
+   3.863347005203026*^9, 3.863347054481646*^9}, {3.863347372402478*^9, 
+   3.8633473789324517`*^9}, {3.8633482261584377`*^9, 3.8633482662511063`*^9}, 
+   3.863348334619026*^9, {3.863348381145955*^9, 3.8633483884490805`*^9}, {
+   3.8633484974856243`*^9, 3.863348497678976*^9}, {3.863348571058346*^9, 
+   3.8633486251598463`*^9}, {3.8633487707084064`*^9, 
+   3.8633487972660713`*^9}, {3.8633488413518567`*^9, 
+   3.8633488443379326`*^9}, {3.8633488906260085`*^9, 3.863348890735383*^9}, {
+   3.8633489409803314`*^9, 3.8633489418214655`*^9}, {3.863348990125646*^9, 
+   3.86334901449539*^9}, {3.863349168814013*^9, 3.8633491705286856`*^9}, {
+   3.8633492741406174`*^9, 3.863349276151946*^9}, {3.8633497243541064`*^9, 
+   3.863349726632292*^9}, {3.863350571315733*^9, 3.8633505778876157`*^9}, {
+   3.86335110430155*^9, 3.863351127833963*^9}, {3.863352355275823*^9, 
+   3.8633523554402637`*^9}, 3.8633533693465095`*^9, {3.8633538849474087`*^9, 
+   3.863353885130746*^9}, {3.863354892650532*^9, 3.8633549196406584`*^9}, {
+   3.863355671520305*^9, 3.8633557442408257`*^9}, {3.8633558333522663`*^9, 
+   3.863355833431706*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8633448140370383`*^9, 3.8633448178575673`*^9}, {
+   3.8633448573695*^9, 3.863344857521386*^9}, {3.863345908591041*^9, 
+   3.8633459093177624`*^9}, {3.8633526724486985`*^9, 3.863352692052946*^9}, 
+   3.8633558399112616`*^9}],
+
+Cell[BoxData[
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", " ", "=", " ", "1"}], ",", " ", 
+   RowBox[{"i", " ", "<", " ", 
+    RowBox[{"count", " ", "+", " ", "1"}]}], ",", " ", 
+   RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"currentDiamond", " ", "=", " ", 
+     RowBox[{"calculateDiamond", "[", 
+      RowBox[{
+       RowBox[{"referencePoints", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", " ", "height", ",", " ", "r"}], 
+      "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"diamonds", " ", "=", " ", 
+     RowBox[{"Join", "[", 
+      RowBox[{"diamonds", ",", " ", 
+       RowBox[{"{", "currentDiamond", "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"referencePoints", " ", "=", " ", 
+     RowBox[{"Join", "[", 
+      RowBox[{"referencePoints", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"currentDiamond", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], ",", " ", 
+         RowBox[{"currentDiamond", "[", 
+          RowBox[{"[", "4", "]"}], "]"}], ",", " ", 
+         RowBox[{"currentDiamond", "[", 
+          RowBox[{"[", "5", "]"}], "]"}]}], "}"}]}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0FkoA3AcB/CZZZMWYcUDbZQHoVajOYqVY0XK0VDSrJxLMsrSHFlKXlbK
+ok0zYbSaIy2mzeyIZDLFpJUjx2TJg9ZylH3/D78+fX/9+j78OJL++g4qhULJ
+iAzcnfEN206CgoPrFjksOzrehyld0QcwwH1wwNFQ2A0vBPxTOC9UEy1bVi/8
+8MgvSc7i++BK+Jz4zVP7YZ5Y8QhtN7dfcG1EFoJi0/ofdC3EUg8jMoesMfAz
+nk2H8jtVHAxWadhQaLjPgb1zhbmwkV5eDE8TnSWQpq2qI3vVLFHaPNYK5/0m
+MVzWqaVwIIrWR3o23pWwsy1tFlbOlWuhkcHWQwmFvgYnWG8GGA49myE727gH
+15t+rZCvnraRez+TYY846StIhqxOjR7ya03EhlTuGfRbdETDqtALAyUdxHGz
+SOHAXxJelPA3V2aAwupUI/zpM25CUWn7NpyiV5ih/cJFTMtstMPFpXZija7H
+Dc8tJg8Mpnve4etVdxDumBU8Z0TGkzUf7g4mFUHRKIf4D/4DRto=
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"drawDiamond", "[", 
+       RowBox[{"#", ",", "Blue"}], "]"}], " ", "&"}], ",", "diamonds"}], 
+    "]"}], "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.863346406607849*^9, 3.863346406619915*^9}, {
+   3.8633474039039016`*^9, 3.8633474399258003`*^9}, {3.863347498474187*^9, 
+   3.8633475125369635`*^9}, {3.863347630858918*^9, 3.863347691801646*^9}, {
+   3.8633477793234034`*^9, 3.863347784754322*^9}, {3.8633538110009604`*^9, 
+   3.863353822975236*^9}, {3.86335387796774*^9, 3.8633538786914377`*^9}, {
+   3.8633540300269156`*^9, 3.8633540374040465`*^9}, {3.86335416953218*^9, 
+   3.8633541841325674`*^9}, {3.8633543515794353`*^9, 
+   3.8633543517644186`*^9}, {3.8633544990158043`*^9, 
+   3.8633545092736406`*^9}, {3.863355609814333*^9, 3.863355612767852*^9}, 
+   3.863355661724578*^9, 3.8633558042907887`*^9}],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, 0}, {2, 0, Rational[5, 2]}}, {{2, 0, 0}, {2, 0, 2.5}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[5, 2]}, {2, Rational[5, 2], Rational[15, 4]}}, {{
+       2, 0, 2.5}, {2, 2.5, 3.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[5, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[15, 4]}}, {{2, 0, 2.5}, {-0.16506350946109638`, -1.25, 
+       3.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[5, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[15, 4]}}, {{2, 0, 2.5}, {4.165063509461096, -1.25, 3.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[15, 4]}, {
+       2, Rational[5, 2], Rational[25, 4]}}, {{2, 2.5, 3.75}, {
+       2, 2.5, 6.25}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[25, 4]}, {
+       2, 5, Rational[15, 2]}}, {{2, 2.5, 6.25}, {2, 5, 7.5}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[25, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[15, 2]}}, {{2, 2.5, 6.25}, {-0.16506350946109638`, 1.25, 
+       7.5}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[25, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[15, 2]}}, {{2, 2.5, 6.25}, {4.165063509461096, 1.25, 
+       7.5}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[15, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[25, 4]}}, {{-0.16506350946109638`, -1.25, 
+      3.75}, {-0.16506350946109638`, -1.25, 6.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[15, 2]}}, {{-0.16506350946109638`, -1.25, 
+      6.25}, {-0.16506350946109638`, 1.25, 7.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        15, 2]}}, {{-0.16506350946109638`, -1.25, 
+      6.25}, {-2.3301270189221928`, -2.5, 7.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       2, Rational[-5, 2], Rational[15, 2]}}, {{-0.16506350946109638`, -1.25, 
+       6.25}, {2, -2.5, 7.5}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[15, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[25, 4]}}, {{4.165063509461096, -1.25, 3.75}, {
+      4.165063509461096, -1.25, 6.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[15, 2]}}, {{4.165063509461096, -1.25, 6.25}, {
+      4.165063509461096, 1.25, 7.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       2, Rational[-5, 2], Rational[15, 2]}}, {{4.165063509461096, -1.25, 
+       6.25}, {2, -2.5, 7.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[25, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        15, 2]}}, {{4.165063509461096, -1.25, 6.25}, {6.330127018922193, -2.5,
+       7.5}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 5, Rational[15, 2]}, {2, 5, 10}}, {{2, 5, 7.5}, {2, 5, 
+       10}}]], Line3DBox[
+     NCache[{{2, 5, 10}, {2, Rational[15, 2], Rational[45, 4]}}, {{2, 5, 
+       10}, {2, 7.5, 11.25}}]], 
+    Line3DBox[
+     NCache[{{2, 5, 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[45, 4]}}, {{2, 5, 10}, {-0.16506350946109638`, 3.75, 
+       11.25}}]], 
+    Line3DBox[
+     NCache[{{2, 5, 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[45, 4]}}, {{2, 5, 10}, {4.165063509461096, 3.75, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], Rational[15, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        10}}, {{-0.16506350946109638`, 1.25, 
+       7.5}, {-0.16506350946109638`, 1.25, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[45, 4]}}, {{-0.16506350946109638`, 1.25, 
+        10}, {-0.16506350946109638`, 3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        45, 4]}}, {{-0.16506350946109638`, 1.25, 10}, {-2.3301270189221928`, 
+        0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       2, 0, Rational[45, 4]}}, {{-0.16506350946109638`, 1.25, 10}, {
+       2, 0, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], Rational[15, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        10}}, {{4.165063509461096, 1.25, 7.5}, {
+       4.165063509461096, 1.25, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[45, 4]}}, {{4.165063509461096, 1.25, 10}, {4.165063509461096,
+        3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {2, 0, Rational[45, 4]}}, {{
+       4.165063509461096, 1.25, 10}, {2, 0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        10}, {Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[
+        45, 4]}}, {{4.165063509461096, 1.25, 10}, {
+       6.330127018922193, 0, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], Rational[15, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        10}}, {{-0.16506350946109638`, 1.25, 
+       7.5}, {-0.16506350946109638`, 1.25, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[45, 4]}}, {{-0.16506350946109638`, 1.25, 
+        10}, {-0.16506350946109638`, 3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        45, 4]}}, {{-0.16506350946109638`, 1.25, 10}, {-2.3301270189221928`, 
+        0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       2, 0, Rational[45, 4]}}, {{-0.16506350946109638`, 1.25, 10}, {
+       2, 0, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], 
+        Rational[15, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], 
+        10}}, {{-2.3301270189221928`, -2.5, 
+       7.5}, {-2.3301270189221928`, -2.5, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        45, 4]}}, {{-2.3301270189221928`, -2.5, 10}, {-2.3301270189221928`, 0,
+         11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}}, {{-2.3301270189221928`, -2.5, 
+        10}, {-4.495190528383289, -3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}}, {{-2.3301270189221928`, -2.5, 
+        10}, {-0.16506350946109638`, -3.75, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], Rational[15, 2]}, {
+       2, Rational[-5, 2], 10}}, {{2, -2.5, 7.5}, {2, -2.5, 10}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {2, 0, Rational[45, 4]}}, {{
+       2, -2.5, 10}, {2, 0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}}, {{
+       2, -2.5, 10}, {-0.16506350946109638`, -3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[45, 4]}}, {{2, -2.5, 10}, {4.165063509461096, -3.75, 
+       11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], Rational[15, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        10}}, {{4.165063509461096, 1.25, 7.5}, {
+       4.165063509461096, 1.25, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[45, 4]}}, {{4.165063509461096, 1.25, 10}, {4.165063509461096,
+        3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {2, 0, Rational[45, 4]}}, {{
+       4.165063509461096, 1.25, 10}, {2, 0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        5, 4], 10}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[45, 4]}}, {{
+       4.165063509461096, 1.25, 10}, {6.330127018922193, 0, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], Rational[15, 2]}, {
+       2, Rational[-5, 2], 10}}, {{2, -2.5, 7.5}, {2, -2.5, 10}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {2, 0, Rational[45, 4]}}, {{
+       2, -2.5, 10}, {2, 0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}}, {{
+       2, -2.5, 10}, {-0.16506350946109638`, -3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[45, 4]}}, {{2, -2.5, 10}, {4.165063509461096, -3.75, 
+       11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], 
+        Rational[15, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], 10}}, {{
+       6.330127018922193, -2.5, 7.5}, {6.330127018922193, -2.5, 10}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[45, 4]}}, {{
+       6.330127018922193, -2.5, 10}, {6.330127018922193, 0, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[45, 4]}}, {{6.330127018922193, -2.5, 10}, {
+       4.165063509461096, -3.75, 11.25}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], 10}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}}, {{6.330127018922193, -2.5, 10}, {
+       8.49519052838329, -3.75, 11.25}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[15, 2], Rational[45, 4]}, {
+       2, Rational[15, 2], Rational[55, 4]}}, {{2, 7.5, 11.25}, {
+       2, 7.5, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[15, 2], Rational[55, 4]}, {2, 10, 15}}, {{
+       2, 7.5, 13.75}, {2, 10, 15}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[15, 2], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         15}}, {{2, 7.5, 13.75}, {-0.16506350946109638`, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[15, 2], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        15}}, {{2, 7.5, 13.75}, {4.165063509461096, 6.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[55, 4]}}, {{-0.16506350946109638`, 3.75, 
+      11.25}, {-0.16506350946109638`, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-0.16506350946109638`, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-2.3301270189221928`, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       2, Rational[5, 2], 15}}, {{-0.16506350946109638`, 3.75, 13.75}, {
+       2, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[55, 4]}}, {{4.165063509461096, 3.75, 11.25}, {
+      4.165063509461096, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        15}}, {{4.165063509461096, 3.75, 13.75}, {
+       4.165063509461096, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {6.330127018922193, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[55, 4]}}, {{-0.16506350946109638`, 3.75, 
+      11.25}, {-0.16506350946109638`, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-0.16506350946109638`, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-2.3301270189221928`, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       2, Rational[5, 2], 15}}, {{-0.16506350946109638`, 3.75, 13.75}, {
+       2, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        55, 4]}}, {{-2.3301270189221928`, 0, 11.25}, {-2.3301270189221928`, 0,
+         13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-2.3301270189221928`, 0, 13.75}, {-2.3301270189221928`, 2.5, 
+        15}}]], Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-4.495190528383289, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-0.16506350946109638`, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[55, 4]}}, {{4.165063509461096, 3.75, 11.25}, {
+      4.165063509461096, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        15}}, {{4.165063509461096, 3.75, 13.75}, {
+       4.165063509461096, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {6.330127018922193, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}}, {{
+       6.330127018922193, 0, 11.25}, {6.330127018922193, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       6.330127018922193, 0, 13.75}, {6.330127018922193, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{6.330127018922193, 0, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{6.330127018922193, 0, 13.75}, {
+       8.49519052838329, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[15, 4],
+         Rational[55, 4]}}, {{-0.16506350946109638`, 3.75, 
+      11.25}, {-0.16506350946109638`, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-0.16506350946109638`, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-0.16506350946109638`, 3.75, 
+       13.75}, {-2.3301270189221928`, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       2, Rational[5, 2], 15}}, {{-0.16506350946109638`, 3.75, 13.75}, {
+       2, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        55, 4]}}, {{-2.3301270189221928`, 0, 11.25}, {-2.3301270189221928`, 0,
+         13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-2.3301270189221928`, 0, 13.75}, {-2.3301270189221928`, 2.5, 
+        15}}]], Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-4.495190528383289, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-0.16506350946109638`, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[
+        55, 4]}}, {{-2.3301270189221928`, 0, 11.25}, {-2.3301270189221928`, 0,
+         13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        15}}, {{-2.3301270189221928`, 0, 13.75}, {-2.3301270189221928`, 2.5, 
+        15}}]], Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-4.495190528383289, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-2.3301270189221928`, 0, 
+        13.75}, {-0.16506350946109638`, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}}, {{-4.495190528383289, -3.75, 
+      11.25}, {-4.495190528383289, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}}, {{-4.495190528383289, -3.75, 
+       13.75}, {-4.495190528383289, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, 
+        15}}, {{-4.495190528383289, -3.75, 
+       13.75}, {-6.6602540378443855`, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 
+        15}}, {{-4.495190528383289, -3.75, 
+       13.75}, {-2.3301270189221928`, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}}, {{-0.16506350946109638`, -3.75, 
+      11.25}, {-0.16506350946109638`, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 
+        15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-2.3301270189221928`, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 
+       15}}, {{-0.16506350946109638`, -3.75, 13.75}, {2, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}}, {{-0.16506350946109638`, -3.75, 
+      11.25}, {-0.16506350946109638`, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 
+        15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-2.3301270189221928`, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 
+       15}}, {{-0.16506350946109638`, -3.75, 13.75}, {2, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[55, 4]}}, {{4.165063509461096, -3.75, 11.25}, {
+      4.165063509461096, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{4.165063509461096, -3.75, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {2, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {6.330127018922193, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[15, 4], 
+        Rational[55, 4]}}, {{4.165063509461096, 3.75, 11.25}, {
+      4.165063509461096, 3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        15}}, {{4.165063509461096, 3.75, 13.75}, {
+       4.165063509461096, 6.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       4.165063509461096, 3.75, 13.75}, {6.330127018922193, 2.5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}}, {{
+       6.330127018922193, 0, 11.25}, {6.330127018922193, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       6.330127018922193, 0, 13.75}, {6.330127018922193, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{6.330127018922193, 0, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{6.330127018922193, 0, 13.75}, {
+       8.49519052838329, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[45, 4]}, {2, 0, Rational[55, 4]}}, {{
+       2, 0, 11.25}, {2, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {2, Rational[5, 2], 15}}, {{
+       2, 0, 13.75}, {2, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{2, 0, 13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{2, 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{2, 0, 13.75}, {4.165063509461096, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}}, {{-0.16506350946109638`, -3.75, 
+      11.25}, {-0.16506350946109638`, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-0.16506350946109638`, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 
+        15}}, {{-0.16506350946109638`, -3.75, 
+       13.75}, {-2.3301270189221928`, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 
+       15}}, {{-0.16506350946109638`, -3.75, 13.75}, {2, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[55, 4]}}, {{4.165063509461096, -3.75, 11.25}, {
+      4.165063509461096, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{4.165063509461096, -3.75, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {2, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {6.330127018922193, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[45, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}}, {{
+       6.330127018922193, 0, 11.25}, {6.330127018922193, 0, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}}, {{
+       6.330127018922193, 0, 13.75}, {6.330127018922193, 2.5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{6.330127018922193, 0, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), 0, Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{6.330127018922193, 0, 13.75}, {
+       8.49519052838329, -1.25, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-15, 4],
+         Rational[55, 4]}}, {{4.165063509461096, -3.75, 11.25}, {
+      4.165063509461096, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        15}}, {{4.165063509461096, -3.75, 13.75}, {
+       4.165063509461096, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {2, -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {2, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}}, {{
+       4.165063509461096, -3.75, 13.75}, {6.330127018922193, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[45, 4]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}}, {{8.49519052838329, -3.75, 
+      11.25}, {8.49519052838329, -3.75, 13.75}}]], 
+    Line3DBox[
+     NCache[{{
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         15}}, {{8.49519052838329, -3.75, 13.75}, {
+       8.49519052838329, -1.25, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}}, {{
+       8.49519052838329, -3.75, 13.75}, {6.330127018922193, -5, 15}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-15, 4], Rational[55, 4]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, 15}}, {{
+       8.49519052838329, -3.75, 13.75}, {10.660254037844386`, -5, 15}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, 10, 15}, {2, 10, Rational[35, 2]}}, {{2, 10, 15}, {
+       2, 10, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, 10, Rational[35, 2]}, {
+       2, Rational[25, 2], Rational[75, 4]}}, {{2, 10, 17.5}, {
+       2, 12.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, 10, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[35, 4],
+         Rational[75, 4]}}, {{2, 10, 17.5}, {-0.16506350946109638`, 8.75, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, 10, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[35, 4], 
+        Rational[75, 4]}}, {{2, 10, 17.5}, {4.165063509461096, 8.75, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, 6.25, 
+        15}, {-0.16506350946109638`, 6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[35, 4],
+         Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 
+      17.5}, {-0.16506350946109638`, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-0.16506350946109638`, 6.25, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 17.5}, {
+       2, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, 6.25, 15}, {4.165063509461096,
+        6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[35, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, 6.25, 17.5}, {
+      4.165063509461096, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {2, 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {6.330127018922193, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, 6.25, 
+        15}, {-0.16506350946109638`, 6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[35, 4],
+         Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 
+      17.5}, {-0.16506350946109638`, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-0.16506350946109638`, 6.25, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 17.5}, {
+       2, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, 6.25, 15}, {4.165063509461096,
+        6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[35, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, 6.25, 17.5}, {
+      4.165063509461096, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {2, 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {6.330127018922193, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, 6.25, 
+        15}, {-0.16506350946109638`, 6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[35, 4],
+         Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 
+      17.5}, {-0.16506350946109638`, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-0.16506350946109638`, 6.25, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 17.5}, {
+       2, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}}, {{-4.495190528383289, -1.25, 
+        15}, {-4.495190528383289, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-6.6602540378443855`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, 6.25, 15}, {4.165063509461096,
+        6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[35, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, 6.25, 17.5}, {
+      4.165063509461096, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {2, 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {6.330127018922193, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{8.49519052838329, -1.25, 15}, {
+       8.49519052838329, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      8.49519052838329, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {6.330127018922193, -2.5, 
+      18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      10.660254037844386`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[25, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, 6.25, 
+        15}, {-0.16506350946109638`, 6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[35, 4],
+         Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 
+      17.5}, {-0.16506350946109638`, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-0.16506350946109638`, 6.25, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{-0.16506350946109638`, 6.25, 17.5}, {
+       2, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}}, {{-4.495190528383289, -1.25, 
+        15}, {-4.495190528383289, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-6.6602540378443855`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{-2.3301270189221928`, 2.5, 15}, {-2.3301270189221928`, 
+       2.5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), 5, Rational[
+        75, 4]}}, {{-2.3301270189221928`, 2.5, 
+       17.5}, {-2.3301270189221928`, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-2.3301270189221928`, 2.5, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}}, {{-4.495190528383289, -1.25, 
+        15}, {-4.495190528383289, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-6.6602540378443855`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}}, {{-4.495190528383289, -1.25, 
+        15}, {-4.495190528383289, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), Rational[5, 4],
+         Rational[75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-4.495190528383289, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-6.6602540378443855`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-4.495190528383289, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}}, {{-6.6602540378443855`, -5, 15}, {-6.6602540378443855`, -5, 
+        17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 - 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-6.6602540378443855`, -5, 
+        17.5}, {-6.6602540378443855`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 + Rational[-25, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-6.6602540378443855`, -5, 
+        17.5}, {-8.825317547305483, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-6.6602540378443855`, -5, 
+        17.5}, {-4.495190528383289, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[
+        35, 2]}}, {{-2.3301270189221928`, -5, 15}, {-2.3301270189221928`, -5, 
+        17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-4.495190528383289, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-0.16506350946109638`, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[
+        35, 2]}}, {{-2.3301270189221928`, -5, 15}, {-2.3301270189221928`, -5, 
+        17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-4.495190528383289, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-0.16506350946109638`, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[
+        35, 2]}}, {{-2.3301270189221928`, -5, 15}, {-2.3301270189221928`, -5, 
+        17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-4.495190528383289, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-0.16506350946109638`, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}}, {{
+       6.330127018922193, -5, 15}, {6.330127018922193, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{6.330127018922193, -5, 17.5}, {6.330127018922193, -2.5, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       4.165063509461096, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       8.49519052838329, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[25, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, 6.25, 15}, {4.165063509461096,
+        6.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[35, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, 6.25, 17.5}, {
+      4.165063509461096, 8.75, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {2, 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[
+        25, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       4.165063509461096, 6.25, 17.5}, {6.330127018922193, 5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{8.49519052838329, -1.25, 15}, {
+       8.49519052838329, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      8.49519052838329, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {6.330127018922193, -2.5, 
+      18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      10.660254037844386`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], 15}, {
+       2, Rational[5, 2], Rational[35, 2]}}, {{2, 2.5, 15}, {2, 2.5, 17.5}}]],
+     Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       2, 5, Rational[75, 4]}}, {{2, 2.5, 17.5}, {2, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {-0.16506350946109638`, 1.25, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{2, Rational[5, 2], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{2, 2.5, 17.5}, {4.165063509461096, 1.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{-0.16506350946109638`, -1.25, 
+        15}, {-0.16506350946109638`, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-0.16506350946109638`, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-0.16506350946109638`, -1.25, 
+      17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{-0.16506350946109638`, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[
+        35, 2]}}, {{-2.3301270189221928`, -5, 15}, {-2.3301270189221928`, -5, 
+        17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 - 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-2.3301270189221928`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-4.495190528383289, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 - 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{-2.3301270189221928`, -5, 
+        17.5}, {-0.16506350946109638`, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}}, {{
+       6.330127018922193, -5, 15}, {6.330127018922193, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{6.330127018922193, -5, 17.5}, {6.330127018922193, -2.5, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       4.165063509461096, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       8.49519052838329, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], Rational[
+        35, 2]}}, {{6.330127018922193, 2.5, 15}, {6.330127018922193, 2.5, 
+       17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), 5, Rational[75, 4]}}, {{
+       6.330127018922193, 2.5, 17.5}, {6.330127018922193, 5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[5, 2], 
+        Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{6.330127018922193, 2.5, 17.5}, {8.49519052838329,
+       1.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{8.49519052838329, -1.25, 15}, {
+       8.49519052838329, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      8.49519052838329, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {6.330127018922193, -2.5, 
+      18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      10.660254037844386`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-5, 4], 
+        Rational[35, 2]}}, {{4.165063509461096, -1.25, 15}, {
+       4.165063509461096, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {
+      4.165063509461096, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{4.165063509461096, -1.25, 
+       17.5}, {2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{4.165063509461096, -1.25, 17.5}, {6.330127018922193, -2.5,
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{2, -5, 15}, {2, -5, Rational[35, 2]}}, {{2, -5, 15}, {
+       2, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       2, Rational[-5, 2], Rational[75, 4]}}, {{2, -5, 17.5}, {
+       2, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[-5, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       2, -5, 17.5}, {-0.16506350946109638`, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{2, -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{2, -5, 17.5}, {4.165063509461096, -6.25, 
+       18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}}, {{
+       6.330127018922193, -5, 15}, {6.330127018922193, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{6.330127018922193, -5, 17.5}, {6.330127018922193, -2.5, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       4.165063509461096, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       8.49519052838329, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], 15}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[-5, 4],
+         Rational[35, 2]}}, {{8.49519052838329, -1.25, 15}, {
+       8.49519052838329, -1.25, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), Rational[5, 4], 
+        Rational[75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      8.49519052838329, 1.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {6.330127018922193, -2.5, 
+      18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-5, 4], Rational[35, 2]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{8.49519052838329, -1.25, 17.5}, {
+      10.660254037844386`, -2.5, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}}, {{
+       6.330127018922193, -5, 15}, {6.330127018922193, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + 5 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{6.330127018922193, -5, 17.5}, {6.330127018922193, -2.5, 
+       18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[5, 2] 3^Rational[1, 2]), Rational[-25, 4],
+         Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       4.165063509461096, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 5 3^Rational[1, 2]), -5, Rational[35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{6.330127018922193, -5, 17.5}, {
+       8.49519052838329, -6.25, 18.75}}]]}, 
+   {RGBColor[0, 0, 1], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, 15}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, Rational[35, 2]}}, {{
+       10.660254037844386`, -5, 15}, {10.660254037844386`, -5, 17.5}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 + 10 3^Rational[1, 2]), Rational[-5, 2], Rational[
+        75, 4]}}, {{10.660254037844386`, -5, 17.5}, {
+       10.660254037844386`, -2.5, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 + Rational[15, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       10.660254037844386`, -5, 17.5}, {8.49519052838329, -6.25, 18.75}}]], 
+    Line3DBox[
+     NCache[{{Rational[1, 2] (4 + 10 3^Rational[1, 2]), -5, Rational[
+        35, 2]}, {
+       Rational[1, 2] (4 + Rational[25, 2] 3^Rational[1, 2]), 
+        Rational[-25, 4], Rational[75, 4]}}, {{
+       10.660254037844386`, -5, 17.5}, {12.825317547305483`, -6.25, 
+       18.75}}]]}},
+  AutomaticImageSize->True,
+  ImageSize->{346.62199480643596`, 304.9236379603043},
+  ViewPoint->{0.2606256506836471, -3.3736849303096257`, -0.01800725430116745},
+  ViewVertical->{0.0793423028842988, -0.6824038370233612, 
+   0.9269653365578538}]], "Output",
+ CellChangeTimes->{3.8633558185374613`*^9, 3.863355849479278*^9}]
+}, Open  ]]
+},
+WindowSize->{1264, 637},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.2 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10282, 221, 796, "Input"],
+Cell[10843, 243, 272, 4, 36, "Input"],
+Cell[11118, 249, 1787, 41, 129, "Input"],
+Cell[CellGroupData[{
+Cell[12930, 294, 938, 18, 60, "Input"],
+Cell[13871, 314, 127707, 2601, 384, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
